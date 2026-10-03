@@ -1,0 +1,37 @@
+# The one front door for every site on this server. Each app joins the
+# external `proxy` Docker network under an alias and gets a block below.
+
+(common) {
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+	# One security.txt for every site (RFC 9116).
+	handle /.well-known/security.txt {
+		root * /etc/caddy
+		rewrite * /security.txt
+		file_server
+	}
+}
+
+irmahs.dev {
+	import common
+	handle {
+		reverse_proxy landing-page:3000
+	}
+}
+
+www.irmahs.dev {
+	redir https://irmahs.dev{uri} permanent
+}
+
+# Placeholder until the app is deployed; swap for `reverse_proxy sleepy-spinner:<port>`.
+sleepy-spinner.irmahs.dev {
+	import common
+	handle {
+		respond "Sleepy Spinner is on its way." 503
+	}
+}

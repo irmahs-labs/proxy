@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate compose and Caddyfile
+        run: |
+          docker compose config --quiet
+          docker run --rm -v "$PWD/caddy:/etc/caddy:ro" caddy:2-alpine \
+            caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+
+  deploy:
+    needs: validate
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Deploy on server
+        run: |
+          ssh deploy@${{ secrets.DEPLOY_HOST }} 'set -e
+            cd /srv/proxy
+            [ -d .git ] || git clone https://github.com/${{ github.repository }}.git .
+            git fetch --depth 1 origin main
+            git reset --hard origin/main
+            # Until scripts/cutover.sh has run, landing-page still owns 80/443.
+            if [ -n "$(docker compose --project-directory /srv/landing-page ps -q caddy 2>/dev/null)" ]; then
+              echo "landing-page Caddy still running: run scripts/cutover.sh on the server first."
+              exit 1
+            fi
+            docker network create proxy 2>/dev/null || true
+            docker compose up -d --remove-orphans
+            docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile'
