@@ -28,6 +28,14 @@ www.irmahs.dev {
 	redir https://irmahs.dev{uri} permanent
 }
 
+# The account service every app signs in through (irmahs-labs/auth).
+auth.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy auth:3001
+	}
+}
+
 # Placeholder until the app is deployed; swap for `reverse_proxy sleepy-spinner:<port>`.
 sleepy-spinner.irmahs.dev {
 	import common
