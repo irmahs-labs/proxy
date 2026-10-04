@@ -36,10 +36,10 @@ auth.irmahs.dev {
 	}
 }
 
-# Placeholder until the app is deployed; swap for `reverse_proxy sleepy-spinner:<port>`.
+# The meal planner (irmahs-labs/sleepy-spinner): the app and its /api.
 sleepy-spinner.irmahs.dev {
 	import common
 	handle {
-		respond "Sleepy Spinner is on its way." 503
+		reverse_proxy sleepy-spinner:3000
 	}
 }
