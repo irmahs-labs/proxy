@@ -4,7 +4,7 @@ The Caddy server in front of every site on the irmahs.dev server. It holds ports
 
 ```
 visitor ──HTTPS──▶ Caddy (this repo) ──proxy network──▶ landing-page:3000      irmahs.dev
-                                                    └─▶ sleepy-spinner         sleepy-spinner.irmahs.dev
+                                                    └─▶ sleepy-spinner         pantry-spinner.irmahs.dev
 ```
 
 ## Layout
