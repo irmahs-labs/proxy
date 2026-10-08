@@ -36,8 +36,8 @@ auth.irmahs.dev {
 	}
 }
 
-# The meal planner (irmahs-labs/sleepy-spinner): the app and its /api.
-sleepy-spinner.irmahs.dev {
+# What’s in my pantry? (irmahs-labs/pantry-spinner): the app and its /api.
+pantry-spinner.irmahs.dev {
 	import common
 	handle {
 		reverse_proxy sleepy-spinner:3000
