@@ -4,7 +4,8 @@ The Caddy server in front of every site on the irmahs.dev server. It holds ports
 
 ```
 visitor ──HTTPS──▶ Caddy (this repo) ──proxy network──▶ landing-page:3000      irmahs.dev
-                                                    └─▶ sleepy-spinner         pantry-spinner.irmahs.dev
+                                                    ├─▶ sleepy-spinner         pantry-spinner.irmahs.dev
+                                                    └─▶ album-cover-maker:3000 album-cover-maker.irmahs.dev
 ```
 
 ## Layout
@@ -19,7 +20,7 @@ scripts/cutover.sh     one time: takes 80/443 over from landing-page's Caddy
 
 ## Adding an app on a subdomain
 
-1. Cloudflare: `A` and `AAAA` records for the subdomain → the server, **DNS only**.
+1. Cloudflare: `A` and `AAAA` records for the subdomain → the server, **Proxied**. Every irmahs.dev record is proxied, so the zone's SSL/TLS mode must stay **Full (strict)**: Caddy still gets its own certificates, because Cloudflare passes `/.well-known/acme-challenge/` through over HTTP. Flexible would make every site loop on redirects.
 2. In the app's `compose.yaml`, join the network under an alias and publish no ports:
    ```yaml
    services:

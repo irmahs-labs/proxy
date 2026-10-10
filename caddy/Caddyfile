@@ -43,3 +43,11 @@ pantry-spinner.irmahs.dev {
 		reverse_proxy sleepy-spinner:3000
 	}
 }
+
+# Album Cover Maker (irmahs-labs/album-cover-maker): a static site, no sign-in.
+album-cover-maker.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy album-cover-maker:3000
+	}
+}
