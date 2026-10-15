@@ -51,3 +51,11 @@ album-cover-maker.irmahs.dev {
 		reverse_proxy album-cover-maker:3000
 	}
 }
+
+# Mini Games (irmahs-labs/minigames): a static site, no sign-in.
+minigames.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy minigames:3000
+	}
+}
