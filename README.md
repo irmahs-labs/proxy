@@ -45,6 +45,22 @@ scripts/cutover.sh     one time: takes 80/443 over from landing-page's Caddy
 
 The deploy reloads Caddy, which does not drop connections. No other site restarts.
 
+## Making an app private
+
+For an app only a few people may open, add `import admins-only <name>` to its block:
+
+```
+my-app.irmahs.dev {
+	import common
+	import admins-only my-app
+	handle {
+		reverse_proxy my-app:3000
+	}
+}
+```
+
+Then list who may open it under that name in the account service's `APP_ACCESS` secret ([irmahs-labs/auth](https://github.com/irmahs-labs/auth#private-apps)). Before every request, Caddy asks the account service: people signed out are sent to Google sign-in and back, people not listed see "This app is private", and the listed ones get through. The app receives who they are in `X-Auth-User-Id` and `X-Auth-User-Email`, which it can trust: Caddy strips any a visitor sends. Until the name is in `APP_ACCESS`, nobody gets in.
+
 ## Secrets
 
 Same three as the other repos (Settings → Secrets and variables → Actions, or once at organization level): `DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`, `DEPLOY_HOST`.

@@ -17,6 +17,19 @@
 	}
 }
 
+# A private app: only the people the account service lists for it, in its
+# APP_ACCESS setting (irmahs-labs/auth), get through. Anyone signed out is
+# sent to sign in with Google and back; anyone else sees "This app is
+# private". The app can trust X-Auth-User-Id and X-Auth-User-Email: Caddy
+# sets them, and strips any a visitor sends. Inside a site block:
+#   import admins-only my-app
+(admins-only) {
+	forward_auth auth:3001 {
+		uri /api/access/{args[0]}
+		copy_headers X-Auth-User-Id X-Auth-User-Email
+	}
+}
+
 irmahs.dev {
 	import common
 	handle {
