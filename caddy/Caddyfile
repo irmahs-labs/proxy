@@ -72,3 +72,13 @@ minigames.irmahs.dev {
 		reverse_proxy minigames:3000
 	}
 }
+
+# alma-housila (irmahs-labs/alma-housila, private): only the people listed
+# for alma-housila in the account service's APP_ACCESS get in.
+alma-housila.irmahs.dev {
+	import common
+	import admins-only alma-housila
+	handle {
+		reverse_proxy alma-housila:3000
+	}
+}

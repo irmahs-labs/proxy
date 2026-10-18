@@ -6,7 +6,8 @@ The Caddy server in front of every site on the irmahs.dev server. It holds ports
 visitor ──HTTPS──▶ Caddy (this repo) ──proxy network──▶ landing-page:3000      irmahs.dev
                                                     ├─▶ sleepy-spinner         pantry-spinner.irmahs.dev
                                                     ├─▶ album-cover-maker:3000 album-cover-maker.irmahs.dev
-                                                    └─▶ minigames:3000         minigames.irmahs.dev
+                                                    ├─▶ minigames:3000         minigames.irmahs.dev
+                                                    └─▶ alma-housila:3000      alma-housila.irmahs.dev (admins only)
 ```
 
 ## Layout
