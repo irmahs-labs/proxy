@@ -82,3 +82,13 @@ alma-housila.irmahs.dev {
 		reverse_proxy alma-housila:3000
 	}
 }
+
+# Paris Live (irmahs-labs/irma-in-paris): the app and its /api. Anyone can
+# look; only admins add places and photos, which the app checks itself
+# with the account service.
+irma-in-paris.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy irma-in-paris:3000
+	}
+}
