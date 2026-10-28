@@ -83,7 +83,7 @@ alma-housila.irmahs.dev {
 	}
 }
 
-# Paris Live (irmahs-labs/irma-in-paris): the app and its /api. Anyone can
+# Irma in Paris (irmahs-labs/irma-in-paris): the app and its /api. Anyone can
 # look; only admins add places and photos, which the app checks itself
 # with the account service.
 irma-in-paris.irmahs.dev {
