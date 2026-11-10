@@ -92,3 +92,13 @@ irma-in-paris.irmahs.dev {
 		reverse_proxy irma-in-paris:3000
 	}
 }
+
+# Tournament Leaderboard (irmahs-labs/tournament-leaderboard): the Spring Boot app
+# and its /api, deployed from the migration branch while the rewrite replaces the
+# Vercel site.
+tournament-leaderboard.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy tournament-leaderboard:8080
+	}
+}
