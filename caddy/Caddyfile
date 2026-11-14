@@ -65,11 +65,24 @@ album-cover-maker.irmahs.dev {
 	}
 }
 
-# Mini Games (irmahs-labs/minigames): a static site, no sign-in.
-minigames.irmahs.dev {
+# Irma’s Playground (irmahs-labs/minigames): the games, their /api and /ws.
+playground.irmahs.dev {
 	import common
 	handle {
 		reverse_proxy minigames:3000
+	}
+}
+
+# Its old address, from when it was Mini Games: every link goes to the same
+# page on the new one, except carry-over.html, which hands a visitor's saved
+# games to the new address on their first visit there.
+minigames.irmahs.dev {
+	import common
+	handle /carry-over.html {
+		reverse_proxy minigames:3000
+	}
+	handle {
+		redir https://playground.irmahs.dev{uri} permanent
 	}
 }
 
