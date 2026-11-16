@@ -65,6 +65,15 @@ album-cover-maker.irmahs.dev {
 	}
 }
 
+# Realms (irmahs-labs/realms): the site and its /api. The Book of Shadows,
+# with Potion Brewing and Spell Creator, moved here from Mini Games.
+realms.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy realms:3000
+	}
+}
+
 # Mini Games (irmahs-labs/minigames): a static site, no sign-in.
 minigames.irmahs.dev {
 	import common
