@@ -7,6 +7,7 @@ visitor ──HTTPS──▶ Caddy (this repo) ──proxy network──▶ land
                                                     ├─▶ sleepy-spinner         pantry-spinner.irmahs.dev
                                                     ├─▶ tools:3000             tools.irmahs.dev (album-cover-maker.irmahs.dev redirects here)
                                                     ├─▶ minigames:3000         minigames.irmahs.dev
+                                                    ├─▶ realms:3000            realms.irmahs.dev
                                                     ├─▶ alma-housila:3000      alma-housila.irmahs.dev (admins only)
                                                     └─▶ irma-in-paris:3000     irma-in-paris.irmahs.dev
 ```
