@@ -57,11 +57,21 @@ pantry-spinner.irmahs.dev {
 	}
 }
 
-# Album Cover Maker (irmahs-labs/album-cover-maker): a static site, no sign-in.
+# Tools (irmahs-labs/tools): a static site, no sign-in. Album Cover Maker
+# lives here now, at /album-cover-maker.
+tools.irmahs.dev {
+	import common
+	handle {
+		reverse_proxy tools:3000
+	}
+}
+
+# Album Cover Maker moved into Tools: every old address goes to the same
+# page there (/make → /album-cover-maker/make).
 album-cover-maker.irmahs.dev {
 	import common
 	handle {
-		reverse_proxy album-cover-maker:3000
+		redir https://tools.irmahs.dev/album-cover-maker{uri} permanent
 	}
 }
 
