@@ -66,15 +66,6 @@ tools.irmahs.dev {
 	}
 }
 
-# Album Cover Maker moved into Tools: every old address goes to the same
-# page there (/make → /album-cover-maker/make).
-album-cover-maker.irmahs.dev {
-	import common
-	handle {
-		redir https://tools.irmahs.dev/album-cover-maker{uri} permanent
-	}
-}
-
 # Realms (irmahs-labs/realms): the site and its /api. The Book of Shadows,
 # with Potion Brewing and Spell Creator, moved here from Mini Games.
 realms.irmahs.dev {
