@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="10">
+<meta name="robots" content="noindex">
+<title>Updating · Tournament Leaderboard</title>
+<style>
+  :root { color-scheme: dark light; --bg: #0a0e13; --text: #ece8e1; --muted: #8b97a5; --accent: #f0484e; }
+  @media (prefers-color-scheme: light) { :root { --bg: #f4f1ec; --text: #14181d; --muted: #59636e; --accent: #c8323a; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px;
+    background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 440px; text-align: center; }
+  svg { display: block; margin: 0 auto 20px; }
+  h1 { margin: 0 0 8px; font-size: 24px; text-transform: uppercase; letter-spacing: .03em; }
+  p { margin: 0 0 6px; color: var(--muted); }
+  .fr { margin-top: 22px; padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--muted) 35%, transparent); }
+  .up { animation: rise 1.6s ease-in-out infinite; }
+  @keyframes rise { 50% { transform: translateY(-3px); } }
+  @media (prefers-reduced-motion: reduce) { .up { animation: none; } }
+</style>
+</head>
+<body>
+<main>
+  <svg width="56" height="56" viewBox="0 0 40 40" fill="none" stroke-width="3" aria-hidden="true">
+    <path d="M20 2l16 9v18l-16 9-16-9V11z" stroke="var(--accent)"/>
+    <g class="up">
+      <path d="M12 24l8-8 8 8" stroke="var(--text)" stroke-width="3.5" stroke-linecap="square"/>
+      <path d="M12 31l8-8 8 8" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="square" opacity=".55"/>
+    </g>
+  </svg>
+  <h1>Updating</h1>
+  <p>Tournament Leaderboard is being updated. Back in a minute.</p>
+  <p>This page reloads by itself; you stay signed in.</p>
+  <div class="fr" lang="fr">
+    <p><strong>Mise à jour en cours.</strong> Retour dans une minute.</p>
+    <p>Cette page se recharge toute seule ; vous restez connecté.</p>
+  </div>
+</main>
+</body>
+</html>

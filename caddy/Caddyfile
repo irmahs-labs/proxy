@@ -105,10 +105,24 @@ irma-in-paris.irmahs.dev {
 
 # Tournament Leaderboard (irmahs-labs/tournament-leaderboard): the Spring Boot app
 # and its /api, deployed from the migration branch while the rewrite replaces the
-# Vercel site.
+# Vercel site. Its deploys start the new app next to the old one under the same
+# alias; if none answers (a restart, a crash), Caddy keeps trying for 10 seconds,
+# then shows an "Updating" page that reloads itself, not Cloudflare's Bad gateway.
 tournament-leaderboard.irmahs.dev {
 	import common
 	handle {
-		reverse_proxy tournament-leaderboard:8080
+		reverse_proxy tournament-leaderboard:8080 {
+			lb_try_duration 10s
+			lb_try_interval 500ms
+		}
+	}
+	handle_errors 502 503 504 {
+		root * /etc/caddy/updating
+		rewrite * /tournament-leaderboard.html
+		header Cache-Control no-store
+		header Retry-After 10
+		file_server {
+			status 503
+		}
 	}
 }
